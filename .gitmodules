@@ -1,0 +1,12 @@
+[submodule "documents/IDE-docs"]
+	path = documents/IDE-docs
+	url = https://github.com/conghuynhho/docs
+[submodule "gitalias"]
+	path = gitalias
+	url = https://github.com/conghuynhho/my-git-alias
+[submodule "terminal/bash-script"]
+	path = terminal/bash-script
+	url = https://github.com/conghuynhho/bash-script
+[submodule "terminal/terminal-utils"]
+	path = terminal/terminal-utils
+	url = https://github.com/conghuynhho/terminal-utils
