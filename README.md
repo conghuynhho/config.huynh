@@ -32,6 +32,10 @@ With powershell:
 git config --global include.path "$env:HUYNH_CONFIG_DIR\gitalias\gitalias.txt"
 ```
 
+## Link bash script to bashrc and bash_profile
+Run this command to add bash script
+With bash:
+```bash
 
 
 
