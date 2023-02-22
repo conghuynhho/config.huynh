@@ -33,11 +33,26 @@ git config --global include.path "$env:HUYNH_CONFIG_DIR\gitalias\gitalias.txt"
 ```
 
 ## Link bash script to bashrc and bash_profile
-Run this command to add bash script
-With bash:
+
+Run this command in your **bash**:
 ```bash
+echo 'test -f $HUYNH_CONFIG_DIR/terminal/bash-script/.mybashrc && . $HUYNH_CONFIG_DIR/terminal/bash-script/.mybashrc' >> ~/.bash_profile
+```
 
+Run this command in your **windows command prompt**:
+```commandline
+echo 'test -f %HUYNH_CONFIG_DIR%/terminal/bash-script/.mybashrc && . %HUYNH_CONFIG_DIR%/terminal/bash-script/.mybashrc' >> ~/.bash_profile
+```
 
+Run this command in your **windows powershell**:
+```powershell
+echo 'test -f $env:HUYNH_CONFIG_DIR/terminal/bash-script/.mybashrc && . $env:HUYNH_CONFIG_DIR/terminal/bash-script/.mybashrc' >> ~/.bash_profile
+```
+
+Note: if ~/.bash_profile not exist, create it. This case is not tested. Supplement document will be added later.
+
+## Link vim config to vimrc
+Will be added later.
 
 
 
