@@ -55,4 +55,13 @@ Note: if ~/.bash_profile not exist, create it. This case is not tested. Suppleme
 Will be added later.
 
 
+## Config oh-my-posh
+TODO: Add document
+#### git bash
+#### powershell
 
+## Add Ps-readline to powershell
+TODO: Add document
+
+## Add terminal icon
+TODO: Add document
