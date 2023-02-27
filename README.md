@@ -56,12 +56,70 @@ Will be added later.
 
 
 ## Config oh-my-posh
-TODO: Add document
+**Install oh-my-posh:**
+```powershell
+winget install JanDeDobbeleer.OhMyPosh -s winget
+```
+Official document: https://ohmyposh.dev/docs/installation/windows
+
+**Install Nerd Font**
+
+Download this font: 
+https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/CascadiaCode.zip
+More fonts at:
+https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/CascadiaCode.zip
+
+After install, configure your terminal/editor to use the installed font.
 #### git bash
+In the `.mybashrc` file is already config oh-my-posh.
+Just make sure to check the environment variable $HUYNH_CONFIG_DIR is correct and `.mybashrc` is sourced in the `.bash_profile`.
+
 #### powershell
+**1. Install powershell from store**:
+https://www.microsoft.com/store/productId/9MZ1SNWT0N5D
 
-## Add Ps-readline to powershell
-TODO: Add document
+After install, open powershell and run this command:
+```powershell
+notepad $PROFILE
+```
 
-## Add terminal icon
-TODO: Add document
+<!-- highlight the text with content "Add this line to the file" -->
+<mark>Add this line to the file</mark>
+
+```powershell
+# load file in $HUYNH_CONFIG_DIR/terminal/terminal-utils/Microsoft.PowerShell_profile.ps1
+if (Test-Path $env:HUYNH_CONFIG_DIR) {
+    $profilePath = Join-Path $env:HUYNH_CONFIG_DIR "terminal/terminal-utils/Microsoft.PowerShell_profile.ps1"
+    if (Test-Path $profilePath) {
+        . $profilePath
+    }
+}
+```
+
+**2. Add Ps-readline to powershell**
+Install PsReadLine:
+```powershell
+Install-Module -Name PSReadLine -Repository PSGallery -Force
+```
+
+Follow the step above to link the `$PROFILE` to the `$HUYNH_CONFIG_DIR\terminal\terminal-utils\Microsoft.PowerShell_profile.ps1`.
+And all done. Enjoy your terminal. 🤩
+
+**3. Install z command**
+Run this command to install z command:
+```powershell
+Install-Module z -AllowClobber
+```
+
+
+**4. Add terminal icon**
+
+Run this command to install terminal icon:
+```powershell
+Install-Module -Name Terminal-Icons -Repository PSGallery
+```
+
+If you already linked your local `$PROFILE` to the `$HUYNH_CONFIG_DIR\terminal\terminal-utils\Microsoft.PowerShell_profile` and it is all done. Enjoy your terminal. 🤩
+
+`Todo:` Add these cool stuff for bash.
+`Todo:` explore the `Microsoft.PowerShell_profile`
