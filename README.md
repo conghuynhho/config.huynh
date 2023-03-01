@@ -74,6 +74,21 @@ After install, configure your terminal/editor to use the installed font.
 In the `.mybashrc` file is already config oh-my-posh.
 Just make sure to check the environment variable $HUYNH_CONFIG_DIR is correct and `.mybashrc` is sourced in the `.bash_profile`.
 
+**Install lsd**
+icon with ls command.
+
+```powershell
+scoop install lsd
+```
+
+**Readline with .inputrc**
+```powershell
+notepad ~/.inputrc
+```
+
+Add content in the `.my-inputrc` to the file.
+
+
 #### powershell
 **1. Install powershell from store**:
 https://www.microsoft.com/store/productId/9MZ1SNWT0N5D
