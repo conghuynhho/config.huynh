@@ -10,3 +10,9 @@
 [submodule "terminal/terminal-utils"]
 	path = terminal/terminal-utils
 	url = https://github.com/conghuynhho/terminal-utils
+[submodule "submodule1"]
+	path = submodule1
+	url = https://github.com/conghuynhho/shared-components
+[submodule "submodule2"]
+	path = submodule2
+	url = https://github.com/conghuynhho/shared-components
