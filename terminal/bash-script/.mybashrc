@@ -1,0 +1,122 @@
+: '
+REQUIREMENT:
+- ggjcp repo $1 : create a pull request from staging to $1.
+    GithubLink will be: https://github.com/gogojungle/<repo>/compare/staging...$1
+- ggjcp repo : create a pull request from staging to current_branch
+- ggjcp repo $1 $2 : create a pull request from $2 to $1.
+    GithubLink will be: https://github.com/gogojungle/<repo>/compare/<$2>...<$1>
+'
+
+
+# ggjcp will run a bash file in the directory of ggj_create_pull.sh
+# ggjcp <repo> <branch1{staging}> <branch2>
+# merge branch1 to branch2
+ggjcp() {
+    repo=$1
+    branch1=$2  # optional
+    branch2=$3  # branch2 is target for merge Ex: master, staging
+
+    # add default value for branch2 is staging
+    if [ -z "$branch2" ]; then
+        branch2="staging"
+    fi
+
+    # add default value for branch1 is current branch
+    if [ -z "$branch1" ]; then
+        branch1=$(git rev-parse --abbrev-ref HEAD)
+    fi
+
+    if [ -z "$repo" ] || [ -z "$branch1" ] || [ -z "$branch2" ]; then
+        # echo with red text
+        echo -e "\e[1;31mMissing arguments\e[0m"
+        echo -e "\e[1;33mUsage: $0 <repo> <branch1> <branch2>\e[0m"
+
+        echo "Github link will be: https://github.com/gogojungle/<repo>/compare/<branch2>...<branch1>"
+        # stop the script but leave the terminal open
+        return 0
+    fi
+
+    # Variable to store a pair of key-value for ggj repo which have $repo as key and $url as value
+    declare -A ggj_repos=(
+        ["sf"]="surface.gogojungle.co.jp"
+        ["mp"]="mypage.gogojungle.co.jp"
+        ["api"]="api.gogojungle.co.jp"
+        ["rt"]="real-trade.tech"
+        ["cf"]="configs.gogojungle.co.jp"
+    )
+
+    # Check if $repo is in the list of ggj_repos
+    if [ -z "${ggj_repos[$repo]}" ]; then
+        echo "Repo $repo is not in the list of ggj_repos"
+        return 0
+    fi
+
+    # debug
+    # echo "repo: $repo"
+    # echo "branch2: $branch2"
+    # echo "branch1: $branch1"
+    # echo "ggj_repos[$repo]: ${ggj_repos[$repo]}"
+
+    # Open github in your browser
+    # check start command if available
+    if ! command -v start &> /dev/null
+    then
+        echo "start could not be found"
+        return 0
+    fi
+
+    # Echo with style
+    echo -e "\e[1;32mOpening github in your browser\e[0m"
+    echo "https://github.com/gogojungle/${ggj_repos[$repo]}/compare/${branch2}...${branch1}"
+    start "https://github.com/gogojungle/${ggj_repos[$repo]}/compare/${branch2}...${branch1}"
+}
+
+# blg will open https://gogojungle.backlog.jp/view/${current git branch name}
+blg() {
+    # check start command if available
+    if ! command -v start &> /dev/null
+    then
+        echo "start could not be found"
+        return 0
+    fi
+
+    # get current branch name
+    branch_name=$(git rev-parse --abbrev-ref HEAD)
+
+    # open backlog
+    start "https://gogojungle.backlog.jp/view/${branch_name}"
+}
+
+mkcd ()
+{
+  mkdir -p -- "$1" && cd -P -- "$1"
+}
+
+admin () {
+    # open powershell with admin at current directory
+    powershell="C:\Users\congh\AppData\Local\Microsoft\WindowsApps\Microsoft.PowerShell_8wekyb3d8bbwe\pwsh.exe"
+    # check path exist
+    if [ ! -f "$powershell" ]; then
+        echo "Warning: $powershell not found"
+        echo "Please install powershell from Microsoft Store or correct the path"
+        echo "Using built-in powershell"
+
+        return 0
+    fi
+    # start powershell with admin at current directory
+    # start "$powershell" -Verb runAs -WorkingDirectory "$current_dir"
+    exec "$powershell" -Command "Start-Process $powershell -Verb RunAs"
+
+}
+
+
+## config plugin
+eval "$(oh-my-posh init bash --config $HUYNH_CONFIG_DIR/terminal/terminal-utils/oh-my-posh/emodipt-extend.omp.json)"
+
+## alias
+alias ls='lsd'
+alias ll='lsd -l'
+alias la='lsd -a'
+alias lla='lsd -la'
+# alias admin='powershell Start-Process powershell -Verb runAs'
+
