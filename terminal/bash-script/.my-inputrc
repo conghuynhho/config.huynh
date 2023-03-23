@@ -1,0 +1,44 @@
+# # Save the last 1000 commands in the history file
+#HISTSIZE=1000
+#HISTFILESIZE=1000
+
+## VIM command
+#set editing-mode vi
+#set show-mode-in-prompt on
+#set vi-ins-mode-string \1\e[6 q\2
+#set vi-cmd-mode-string \1\e[2 q\2
+
+# Enable case-insensitive tab completion
+set completion-ignore-case on
+set show-all-if-ambiguous on
+
+# Color files by types
+# Note that this may cause completion text blink in some terminals (e.g. xterm).
+set colored-stats On
+# Append char to indicate type
+set visible-stats On
+# Mark symlinked directories
+set mark-symlinked-directories On
+# Color the common prefix
+set colored-completion-prefix On
+# Color the common prefix in menu-complete
+set menu-complete-display-prefix On
+
+#Readline causes the terminal to echo ^C after Ctrl+C is pressed.
+set echo-control-characters off
+
+# Use the up and down arrows to search through command history
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+# add key bindings for Ctrl+b to cd to the previous directory
+"\eb": "cd ..\n"
+"\eh": "cd $HUYNH_CONFIG_DIR\n"
+
+"\C-d" kill-whole-line
+
+# add key bindings for alt+o to append the current git branch to the end of the current command
+#"\eo":"\C-ugit c -am `git rev-parse --abbrev-ref HEAD`\e\C-e\C-a\C-y\C-e"
+#"\C-p":"\C-u`date +%Y%m%d%H%M`\e\C-e\C-a\C-y\C-e\C-e"
+#"\eu":"`git rev-parse --abbrev-ref HEAD`\e\C-e"
+"\en":"`git rev-parse --abbrev-ref HEAD`\e\C-e\C-u git c -am '\C-e\C-y\C-e '\C-b"
+"\em":"git c -am ''\C-b"
