@@ -785,3 +785,11 @@ function removeDockerContainerByID {
 }
 
 set-alias rmc removeDockerContainerByID
+
+function stopDockerContainerByID {
+    $container_name = $args[0]
+    $container_id = docker ps -a --filter ancestor=<image-name> --format "{{.ID}}"
+    docker rm $container_id
+}
+
+set-alias stc stopDockerContainerByID
