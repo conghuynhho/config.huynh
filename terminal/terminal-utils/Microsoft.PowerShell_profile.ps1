@@ -773,3 +773,15 @@ function openAdminTerminal {
 
 }
 set-alias admin openAdminTerminal
+
+function copyCurrentDIR { Get-Location | Set-Clipboard }
+
+set-alias cpdir copyCurrentDIR
+
+function removeDockerContainerByID {
+    $container_name = $args[0]
+    $container_id = docker ps -a --filter ancestor=<image-name> --format "{{.ID}}"
+    docker rm $container_id
+}
+
+set-alias rmc removeDockerContainerByID
