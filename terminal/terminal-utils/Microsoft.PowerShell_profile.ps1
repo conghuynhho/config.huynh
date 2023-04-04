@@ -38,8 +38,6 @@ Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
 }
 
 # ---
-
-
 # This is an example profile for PSReadLine.
 #
 # This is roughly what I use so there is some emphasis on emacs bindings,
@@ -780,15 +778,17 @@ set-alias cpdir copyCurrentDIR
 
 function removeDockerContainerByID {
     $container_name = $args[0]
-    $container_id = docker ps -a --filter ancestor=<image-name> --format "{{.ID}}"
-    docker rm $container_id
+    $container_id = docker ps -a -q --filter ancestor=$container_name --format "{{.ID}}"
+    Write-Host "container_id: $container_id"
+    Write-Host "container_id: $container_name"
+    docker rm $container_id -f
 }
 
 set-alias rmc removeDockerContainerByID
 
 function stopDockerContainerByID {
     $container_name = $args[0]
-    $container_id = docker ps -a --filter ancestor=<image-name> --format "{{.ID}}"
+    $container_id = docker ps -a --filter ancestor=$container_name --format "{{.ID}}"
     docker rm $container_id
 }
 
