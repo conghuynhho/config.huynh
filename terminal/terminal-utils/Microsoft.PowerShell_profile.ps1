@@ -16,7 +16,7 @@ Import-Module -Name Terminal-Icons
 if (-not (Test-Path env:HUYNH_CONFIG_DIR)) {
     Write-Error 'Please set $HUYNH_CONFIG_DIR env variable to your config directory'
 }
-oh-my-posh --init --shell pwsh --config $env:HUYNH_CONFIG_DIR/terminal/terminal-utils/oh-my-posh/tokyonight_storm.omp.json | Invoke-Expression
+oh-my-posh --init --shell pwsh --config $env:HUYNH_CONFIG_DIR/terminal/terminal-utils/oh-my-posh/tokyonight_stormv2.omp.json | Invoke-Expression
 
 
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
