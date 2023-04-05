@@ -116,7 +116,7 @@
           }
         }
       ],
-      "type": "prompt"
+      "type": "rprompt"
     },
     {
       "alignment": "left",
