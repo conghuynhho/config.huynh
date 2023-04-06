@@ -789,7 +789,53 @@ set-alias rmc removeDockerContainerByID
 function stopDockerContainerByID {
     $container_name = $args[0]
     $container_id = docker ps -a --filter ancestor=$container_name --format "{{.ID}}"
-    docker rm $container_id
+    docker stop $container_id
 }
 
 set-alias stc stopDockerContainerByID
+
+# implement function to copy previous command output to clipboard
+# example:
+#   previous command: echo Hello
+#   output: Hello
+#   next command copypre
+#   clipboard: Hello
+function copyPreviousOutput {
+    $previous_command = Get-History -Count 1
+    $previous_command_output = Invoke-Expression $previous_command
+    if($previous_command_output -eq $null) {
+        Write-Host "No previous command output found"
+        return
+    }
+
+    $previous_command_output | Set-Clipboard
+}
+set-alias cppre copyPreviousOutput
+
+function getDockerImagesIdByName {
+    $image_name = $args[0]
+    $image_id = docker images -q $image_name
+    if($image_id -eq $null) {
+        Write-Host "No image found"
+        return
+    }
+    Write-Host "image_id: $image_id"
+    Write-Host "image_name: $image_name"
+    $image_id | Set-Clipboard
+    Write-Host "Copied images_id to clipboard" -ForegroundColor Green
+
+}
+set-alias gii getDockerImagesIdByName
+
+function removeDockerImagesByName {
+    $image_name = $args[0]
+    $image_id = docker images -q $image_name
+    if($image_id -eq $null) {
+        Write-Host "No image found"
+        return
+    }
+    Write-Host "image_id: $image_id"
+    Write-Host "image_name: $image_name"
+    docker rmi $image_id -f
+}
+set-alias rmi removeDockerImagesByName
