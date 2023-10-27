@@ -17,7 +17,6 @@
   # ggj merge conflict into staging
   ggjmpre = !git b -D pre-staging && git f && git o pre-staging && git m --no-ff $1
   resetpre = !git b -D pre-staging && git f && git o pre-staging
-  ggjcbs = !git f && git o -b $1 origin/staging
   # get remote url of origin
   rurl = config --get remote.origin.url
   rs = remote show origin
